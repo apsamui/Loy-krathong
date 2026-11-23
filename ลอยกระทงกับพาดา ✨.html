@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ลอยกระทงกับพาดา ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#ffd27a;--glow:#ffb347;--ink:#fff7e6;--pink:#ff7eb6;box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{font-family:'Prompt','Kanit',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#120a3a 0%,#2c1760 45%,#5b2a86 80%,#8a3d8f 100%);overflow:hidden;position:relative}
+#sky,#fx{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
+.lantern{position:absolute;bottom:-80px;width:var(--s);height:calc(var(--s)*1.25);border-radius:40% 40% 30% 30%;background:radial-gradient(circle at 50% 70%,#fff3b0,#ffb347 55%,#e2761b);box-shadow:0 0 18px 6px rgba(255,179,71,.55);opacity:var(--o,.7);animation:rise var(--d) linear var(--dl) infinite}
+.lantern::after{content:"";position:absolute;left:20%;right:20%;bottom:-5px;height:5px;border-radius:3px;background:#a4530f}
+@keyframes rise{0%{transform:translate(0,0)}25%{transform:translate(18px,-28vh)}50%{transform:translate(-14px,-58vh)}75%{transform:translate(16px,-88vh)}100%{transform:translate(0,-125vh)}}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px 2px var(--glow);animation:sp 1.3s ease-out forwards}
+@keyframes sp{to{transform:translate(var(--dx),var(--dy));opacity:0}}
+main{position:relative;z-index:2;height:100%;overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 28px) 20px calc(env(safe-area-inset-bottom,0px) + 190px);display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+h1{font-size:clamp(1.55rem,7vw,2.2rem);font-weight:600;line-height:1.4;margin:6px 0 0;color:var(--gold);text-shadow:0 0 18px rgba(255,190,90,.7)}
+.card{width:100%;max-width:420px;background:rgba(20,10,60,.5);border:1px solid rgba(255,210,122,.35);border-radius:22px;padding:20px 18px;backdrop-filter:blur(6px);box-shadow:0 0 30px rgba(255,179,71,.15)}
+.msg{font-weight:300;line-height:1.9;font-size:1.02rem;margin:0}
+.q{display:block;margin-top:12px;font-weight:500;font-size:1.15rem;color:var(--gold)}
+.btns{display:flex;gap:12px;justify-content:center;margin-top:18px;min-height:54px}
+button{font-family:inherit;font-size:1.05rem;font-weight:500;border:0;border-radius:999px;padding:14px 24px;cursor:pointer;touch-action:manipulation}
+#yes{background:linear-gradient(135deg,#ff7eb6,#ff9a5a);color:#fff;box-shadow:0 0 20px rgba(255,126,182,.6);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.07)}}
+#no{background:rgba(255,255,255,.14);color:var(--ink);border:1px solid rgba(255,255,255,.3);transition:left .25s,top .25s}
+#no.fly{position:fixed;z-index:20}
+#hint{min-height:1.8em;margin:12px 0 0;font-size:.95rem;color:#ffd9ec}
+.hidden{display:none!important}
+.pass{background:linear-gradient(135deg,#ffe9a8,#ffc457 55%,#ffdf8a);color:#4a2a05;border-radius:20px;padding:22px 18px;position:relative;box-shadow:0 0 36px rgba(255,200,90,.7);animation:pop .7s cubic-bezier(.2,1.4,.4,1)}
+.pass::before,.pass::after{content:"";position:absolute;top:58%;width:22px;height:22px;border-radius:50%;background:#2c1760}
+.pass::before{left:-11px}.pass::after{right:-11px}
+.pass h2{margin:0 0 10px;font-size:1.2rem;font-weight:600}
+.pass .dash{border-top:2px dashed rgba(74,42,5,.4);margin:12px 0}
+.pass p{margin:6px 0;font-weight:500}
+@keyframes pop{from{transform:scale(.3) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+.wish input{width:100%;font-family:inherit;font-size:1rem;padding:13px 16px;border-radius:14px;border:1px solid rgba(255,210,122,.5);background:rgba(255,255,255,.1);color:var(--ink);outline:0;margin-bottom:12px}
+.wish input::placeholder{color:rgba(255,247,230,.6)}
+.wish button{background:linear-gradient(135deg,#ffd27a,#ffb347);color:#4a2a05;box-shadow:0 0 18px rgba(255,179,71,.6)}
+#river{position:fixed;left:0;right:0;bottom:0;height:170px;z-index:30;pointer-events:none;overflow:visible;padding-bottom:env(safe-area-inset-bottom,0px);background:linear-gradient(180deg,rgba(10,8,40,0) 0%,#0b0a35 28%,#050420 100%)}
+.wave{position:absolute;left:0;width:200%;height:60px;animation:wv var(--t) linear infinite}
+@keyframes wv{to{transform:translateX(-50%)}}
+.kr{position:absolute;bottom:58px;left:-130px;width:92px;animation:sail var(--t) linear forwards}
+.kr>div{animation:bob 2.4s ease-in-out infinite}
+@keyframes sail{to{left:calc(100vw + 40px)}}
+@keyframes bob{50%{transform:translateY(-5px) rotate(2deg)}}
+.fl{transform-origin:50% 100%;animation:fk .35s ease-in-out infinite alternate}
+@keyframes fk{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.85,1.15) rotate(3deg)}}
+.glowpool{position:absolute;left:-30px;right:-30px;bottom:-14px;height:26px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,190,90,.55),transparent 70%)}
+.bubble{z-index:5;position:absolute;bottom:92px;left:50%;transform:translateX(-50%);width:max-content;max-width:150px;font-size:.78rem;line-height:1.4;background:rgba(255,247,230,.92);color:#4a2a05;border-radius:12px;padding:6px 10px;box-shadow:0 0 14px rgba(255,210,122,.8)}
+.shake{animation:shk .4s}
+@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+</style>
+</head>
+<body>
+<div id="sky"></div>
+<div id="fx"></div>
+<main>
+  <h1>สุขสันต์วันลอยกระทงนะ พาดา ✨</h1>
+  <section class="card" id="ask">
+    <p class="msg">คืนลอยกระทงจะพิเศษจริงๆ ก็ต่อเมื่อได้อยู่กับเธอ แสงเทียนบนผิวน้ำคงสวยไม่เท่ารอยยิ้มของเธอหรอกนะ อยากให้ทุกคำอธิษฐานของปีนี้ มีเธออยู่ข้างๆ เราสองคนเสมอ 💛
+      <span class="q">วันอังคารที่ 24 นี้ ไปลอยกระทงด้วยกันนะ?</span></p>
+    <div class="btns"><button id="yes">ไปสิ! 💖</button><button id="no">ไม่ไป 😝</button></div>
+    <p id="hint"></p>
+  </section>
+  <section class="hidden" id="after" style="width:100%;max-width:420px;display:flex;flex-direction:column;gap:18px">
+    <div class="pass">
+      <h2>ตั๋วไปลอยกระทงของพาดา 🎟️✨</h2>
+      <div class="dash"></div>
+      <p>📅 วันอังคารที่ 24 พฤศจิกายน (Tuesday)</p>
+      <p>จองตัวไว้แล้ว ห้ามยกเลิก 💖</p>
+    </div>
+    <div class="card wish">
+      <input id="wish" maxlength="60" placeholder="พิมพ์คำอธิษฐานของพาดาตรงนี้..." autocomplete="off">
+      <button id="float">ลอยกระทงของเรากัน ✨</button>
+      <p id="sent" class="msg" style="margin-top:12px"></p>
+    </div>
+  </section>
+</main>
+<div id="river">
+  <svg class="wave" style="bottom:70px;--t:14s;opacity:.55" viewBox="0 0 800 60" preserveAspectRatio="none"><path d="M0 30Q50 10 100 30T200 30T300 30T400 30T500 30T600 30T700 30T800 30V60H0Z" fill="#1d1a66"/></svg>
+  <svg class="wave" style="bottom:38px;--t:9s;opacity:.8" viewBox="0 0 800 60" preserveAspectRatio="none"><path d="M0 30Q50 50 100 30T200 30T300 30T400 30T500 30T600 30T700 30T800 30V60H0Z" fill="#141150"/></svg>
+  <svg class="wave" style="bottom:0;--t:6s" viewBox="0 0 800 60" preserveAspectRatio="none"><path d="M0 30Q50 12 100 30T200 30T300 30T400 30T500 30T600 30T700 30T800 30V60H0Z" fill="#0a0833"/></svg>
+</div>
+<script>
+const $=id=>document.getElementById(id), sky=$('sky'), fx=$('fx'), river=$('river');
+const R=(a,b)=>a+Math.random()*(b-a);
+for(let i=0;i<70;i++){const s=document.createElement('div');s.className='star';s.style.cssText=`left:${R(0,100)}%;top:${R(0,75)}%;animation-delay:${R(0,3)}s;animation-duration:${R(2,4.5)}s`;sky.appendChild(s)}
+function lantern(parent,big){const l=document.createElement('div');l.className='lantern';l.style.cssText=`left:${R(0,96)}%;--s:${big?R(18,38):R(12,26)}px;--d:${big?R(5,9):R(14,26)}s;--dl:${big?R(0,2):-R(0,22)}s;--o:${big?.95:R(.4,.8)}`;parent.appendChild(l)}
+for(let i=0;i<14;i++)lantern(sky,false);
+function kr(){return `<div><svg viewBox="0 0 92 80" width="92"><g class="fl" style="transform-origin:46px 30px"><path d="M46 8C40 16 40 24 46 28C52 24 52 16 46 8Z" fill="#ffd27a"/><path d="M46 15C43 20 43 24 46 26C49 24 49 20 46 15Z" fill="#fff6c9"/></g>
+<rect x="43.5" y="28" width="5" height="18" rx="1.5" fill="#fff3d6"/>
+<g stroke="#8a5a2b" stroke-width="1.6" stroke-linecap="round"><path d="M30 48L24 22"/><path d="M62 48L68 22"/></g><circle cx="24" cy="21" r="2" fill="#ff6a3d"/><circle cx="68" cy="21" r="2" fill="#ff6a3d"/>
+<path d="M6 56Q46 78 86 56L80 50H12Z" fill="#6fbf6a"/>
+<g fill="#ff9ec8"><ellipse cx="22" cy="48" rx="8" ry="13" transform="rotate(-50 22 48)"/><ellipse cx="70" cy="48" rx="8" ry="13" transform="rotate(50 70 48)"/><ellipse cx="32" cy="45" rx="8" ry="14" transform="rotate(-24 32 45)"/><ellipse cx="60" cy="45" rx="8" ry="14" transform="rotate(24 60 45)"/></g>
+<ellipse cx="46" cy="46" rx="8" ry="14" fill="#ffc2de"/><path d="M8 54Q46 72 84 54" stroke="#ffe27a" stroke-width="2" fill="none"/></svg><div class="glowpool"></div></div>`}
+function sail(t,wish){const k=document.createElement('div');k.className='kr';k.style.setProperty('--t',t+'s');k.innerHTML=kr()+(wish?'<div class="bubble"></div>':'');if(wish)k.querySelector('.bubble').textContent=wish;river.appendChild(k);if(wish)k.addEventListener('animationend',()=>k.remove());return k}
+function loop(){const k=sail(26);k.style.animationIterationCount='infinite'}
+loop();setTimeout(()=>{const k=sail(26);k.style.animationIterationCount='infinite'},13000);
+// dodge
+const msgs=["แน่ใจเหรอพาดา?","กดไม่โดนหรอก!","วันอังคารนี้ห้ามเบี้ยวนะ!","คิดถึงของกินอร่อยๆ ไว้สิ!","ปุ่มนี้เสีย กดอีกปุ่มดีกว่านะ 😉"];
+let mi=0;const no=$('no'),yes=$('yes');
+function dodge(e){if(e){e.preventDefault();e.stopPropagation()}
+ $('hint').textContent=msgs[mi++%msgs.length];$('hint').classList.remove('shake');void $('hint').offsetWidth;$('hint').classList.add('shake');
+ no.classList.add('fly');const w=no.offsetWidth,h=no.offsetHeight,m=12,top0=m+(window.visualViewport?0:0);
+ const W=innerWidth-w-m,H=innerHeight-h-m-150;const yr=yes.getBoundingClientRect();let x,y,t=0;
+ do{x=R(m,Math.max(m,W));y=R(m+20,Math.max(m+20,H));t++}while(t<12&&x<yr.right+10&&x+w>yr.left-10&&y<yr.bottom+10&&y+h>yr.top-10);
+ no.style.left=x+'px';no.style.top=y+'px'}
+['pointerenter','pointerdown','touchstart','click'].forEach(ev=>no.addEventListener(ev,dodge,{passive:false}));
+// yes
+function burst(){const x=R(10,90),y=R(10,50);const col=['#ffd27a','#ffb347','#ff9ec8','#fff3b0'];
+ for(let i=0;i<14;i++){const s=document.createElement('div');s.className='spark';const a=i/14*6.283,d=R(40,90);
+  s.style.cssText=`left:${x}%;top:${y}%;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;background:${col[i%4]}`;fx.appendChild(s);setTimeout(()=>s.remove(),1400)}}
+yes.addEventListener('click',()=>{
+ $('ask').classList.add('hidden');no.classList.add('hidden');
+ const a=$('after');a.classList.remove('hidden');a.style.display='flex';
+ for(let i=0;i<40;i++)lantern(sky,true);
+ let n=0;const iv=setInterval(()=>{burst();if(++n>12)clearInterval(iv)},350);burst();
+ document.querySelector('main').scrollTo({top:0,behavior:'smooth'})});
+// wish
+$('float').addEventListener('click',()=>{const inp=$('wish');const t=inp.value.trim()||'ขอให้เรามีความสุขด้วยกันตลอดไป';
+ sail(14,t);inp.value='';$('sent').textContent='กระทงของเราลอยไปแล้วนะ ขอให้ได้ตามที่อธิษฐานเลย ✨';burst()});
+</script>
+</body>
+</html>
